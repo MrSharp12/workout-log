@@ -17,6 +17,7 @@ User.sync();
 app.use(bodyParser.json());
 app.use(require('./middleware/headers'));
 app.use('/api/user', require('./routes/user'));
+app.use('/api/login', require('./routes/session'));//login route
 app.use('/api/test', function(req, res){
 	res.send("Hello World");
 });
