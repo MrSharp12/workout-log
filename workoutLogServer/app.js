@@ -16,6 +16,7 @@ User.sync();
 //parse data off incoming requests, turn it into JSON
 app.use(bodyParser.json());
 app.use(require('./middleware/headers'));
+app.use(require('./middleware/validate-session'));//creating a user
 app.use('/api/user', require('./routes/user'));
 app.use('/api/login', require('./routes/session'));//login route
 app.use('/api/test', function(req, res){
