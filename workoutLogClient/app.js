@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#testAPI").on("click", function(){
-		console.log("It's alive!");
+		console.log("It's alive!");//checks to see if api button is working
     });
     
     var test = $.ajax({
