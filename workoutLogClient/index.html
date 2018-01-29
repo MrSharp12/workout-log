@@ -59,7 +59,28 @@
        </div>
      </div>
    </div>
-
+   
+   <div class="modal fade" id="signup-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4 class="modal-title">Sign Up</h4>
+       </div>
+       <div class="modal-body">
+       <div class="alert alert-danger" role="alert" style="display:none;" id="su_error"></div>
+         <label for="su_username">Username:</label>
+         <input id="su_username" />
+         <label for="su_password">Password:</label>
+         <input type="password" id="su_password" />
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+         <button id="signup" type="button" class="btn btn-primary">Signup</button>
+       </div>
+      </div>
+    </div>
+  </div>
 
 
 
