@@ -38,7 +38,7 @@ var User = sequelize.define('user', {
 //doesn't drop db
 User.sync();
 
-//drops the table if we need to do so
+//DANGER: DROPS THE TABLE
 //User.sync({ force: true });
 
 //tells app to use bodyParser
