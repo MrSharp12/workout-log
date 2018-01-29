@@ -1,7 +1,7 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var sequelize = require('./db');
+let express = require('express');
+let app = express();
+let bodyParser = require('body-parser');
+let sequelize = require('./db');
 
 var User = sequelize.import('./models/user.js');
 
