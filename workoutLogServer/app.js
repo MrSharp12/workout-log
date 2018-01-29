@@ -1,38 +1,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');//helps the server parse out incoming requests
-
-app.use(require('./middleware/headers'));//places middleware header to prevent CORS
-
-app.listen(3000, function(){
-    console.log("app is listening on 3000");
-    });
-
-app.use('/api/test', function(req, res){
-	res.send("Hello World");
-});
-
-
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('workoutlog', 'postgres', 'Rorylovespygar1', {
-	host: 'localhost',
-	dialect: 'postgres'
-});
-
-sequelize.authenticate().then(
-	function() {
-		console.log('connected to workoutlog postgres db');
-	},
-	function(err){
-		console.log(err);
-	}
-);
-
-//build a user model in sequelize
-var User = sequelize.define('user', {
-    username: Sequelize.STRING,
-    passwordhash: Sequelize.STRING,
-});
+var sequelize = require('./db.js');
+var User = sequelize.import('./models/user');
 
 //creates a table in postgres, matches the defined model
 //doesn't drop db
@@ -45,6 +15,15 @@ User.sync();
 //parse data off incoming requests, turn it into JSON
 app.use(bodyParser.json());
 
+app.use(require('./middleware/headers'));//places middleware header to prevent CORS
+
+app.use('/api/test', function(req, res){
+	res.send("Hello World");
+});
+
+app.listen(3000, function(){
+    console.log("app is listening on 3000");
+    });
 
 //need to create a user object and use sequelize to put that user
 //into our database
