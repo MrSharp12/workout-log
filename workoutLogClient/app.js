@@ -1,10 +1,10 @@
 $(function(){
 
-    var WorkoutLog = (function($, undefined) {
-          var API_BASE = 'http://localhost:3000/api/';
-          var userDefinitions = [];
+    let WorkoutLog = (function($, undefined) {
+          let API_BASE = 'http://localhost:3000/api/';
+          let userDefinitions = [];
     
-          var setAuthHeader = function(sessionToken) {
+          let setAuthHeader = function(sessionToken) {
              window.localStorage.setItem('sessionToken', sessionToken);
              // Set the authorization header
              // This can be done on individual calls
@@ -25,7 +25,7 @@ $(function(){
     
        // Ensure .disabled aren't clickable
        $('.nav-tabs a[data-toggle="tab"]').on('click', function(e) {
-          var token = window.localStorage.getItem('sessionToken');
+          let token = window.localStorage.getItem('sessionToken');
           if ($(this).hasClass('disabled') && !token) {
              e.preventDefault();
              return false;
@@ -34,7 +34,7 @@ $(function(){
     
        // bind tab change events
        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          var target = $(e.target).attr('href'); // activated tab
+          let target = $(e.target).attr('href'); // activated tab
           if (target === '#log') {
              WorkoutLog.log.setDefinitions();
           }
@@ -56,7 +56,7 @@ $(function(){
           }
        });
        // setHeader if we
-       var token = window.localStorage.getItem('sessionToken');
+       let token = window.localStorage.getItem('sessionToken');
        if (token) {
           WorkoutLog.setAuthHeader(token); 
        }

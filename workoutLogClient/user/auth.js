@@ -1,10 +1,10 @@
 $(function() {
     $.extend( WorkoutLog, {
        signup: function() {
-             var username = $("#su_username").val();
-             var password = $("#su_password").val();
-             var user = {user:  {username: username, password: password }};
-             var signup = $.ajax({
+             let username = $("#su_username").val();
+             let password = $("#su_password").val();
+             let user = {user:  {username: username, password: password }};
+             let signup = $.ajax({
                 type: "POST", 
                 url: WorkoutLog.API_BASE + "user", 
                 data: JSON.stringify(user), 
@@ -29,10 +29,10 @@ $(function() {
        },
  
        login: function() {
-            var username = $("#li_username").val();
-            var password = $("#li_password").val();
-            var user = {user:  {username: username, password: password }};
-            var login = $.ajax({
+            let username = $("#li_username").val();
+            let password = $("#li_password").val();
+            let user = {user:  {username: username, password: password }};
+            let login = $.ajax({
                 type: "POST", 
                 url: WorkoutLog.API_BASE + "login", 
                 data: JSON.stringify(user), 
