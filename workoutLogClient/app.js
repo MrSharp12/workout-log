@@ -43,6 +43,7 @@ $(function(){
              WorkoutLog.log.setHistory();
           }
        });
+
     
        // bind enter key
        $(document).on('keypress', function(e) {
@@ -55,6 +56,30 @@ $(function(){
              }
           }
        });
+       //bind tab change events
+       //bootstrap tab --> binding to a bootstrap event
+       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+           let target = $(e.target).attr('href');//activated tab
+           if (target === '#log') {
+               WorkoutLog.log.setDefinitions();
+           }
+           if (target === '#history') {
+               WorkoutLog.log.setHistory();
+           }
+       });
+
+       //bind enter key
+       $(document).on('keypress', function(e) {
+           if (e.which === 13) { //enter key
+            if ($('#signup-modal').is(':visible')) {
+                $('#signup').trigger('click');
+            }
+            if ($('#login-modal').is(':visible')) {
+                $('#login').trigger('click');
+            }
+           }
+       });
+       
        // setHeader if we
        let token = window.localStorage.getItem('sessionToken');
        if (token) {
