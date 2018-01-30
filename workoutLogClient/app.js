@@ -1,7 +1,7 @@
 $(function(){
 
     var WorkoutLog = (function($, undefined) {
-          var API_BASE =  'http://localhost:3000/api/';
+          var API_BASE = 'http://localhost:3000/api/';
           var userDefinitions = [];
     
           var setAuthHeader = function(sessionToken) {
@@ -35,7 +35,7 @@ $(function(){
        // bind tab change events
        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
           var target = $(e.target).attr('href'); // activated tab
-          if (target === 'cd#log') {
+          if (target === '#log') {
              WorkoutLog.log.setDefinitions();
           }
     
