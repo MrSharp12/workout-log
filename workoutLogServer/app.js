@@ -15,13 +15,13 @@ User.sync();
 //tells app to use bodyParser
 //parse data off incoming requests, turn it into JSON
 app.use(bodyParser.json());
+
 app.use(require('./middleware/headers'));
 app.use(require('./middleware/validate-session'));//creating a user
+
 app.use('/api/user', require('./routes/user'));
 app.use('/api/login', require('./routes/session'));//login route
-app.use('/api/test', function(req, res){
-	res.send("Hello World");
-});
+app.use('/api/definition', require('./routes/definition'));
 
 app.listen(3000, function(){
 	console.log('App is listening on 3000.')
