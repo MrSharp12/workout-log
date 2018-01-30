@@ -15,6 +15,9 @@ $(function() {
                    WorkoutLog.setAuthHeader(data.sessionToken);
                    WorkoutLog.definition.fetchAll();
                    WorkoutLog.log.fetchAll();
+                   $("#su_username").val("");
+                   $("#su_password").val("");
+                   $('a[href="#define"]').tab('show');
                    console.log('You made it!');
                    console.log(data.sessionToken);
                    
@@ -45,6 +48,9 @@ $(function() {
                 WorkoutLog.setAuthHeader(data.sessionToken);
                 WorkoutLog.definition.fetchAll();
                 WorkoutLog.log.fetchAll();
+                $("#li_username").val("");
+                $("#li_password").val(""); 
+                $('a[href="#define"]').tab("show");
                 
                 }
                 // TODO: add logic to set user and auth token	
