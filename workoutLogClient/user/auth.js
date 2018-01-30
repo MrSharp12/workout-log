@@ -47,7 +47,7 @@ $(function() {
                 $("#loginout").text("Logout");
             })
             .fail(function() {
-                $("#li_error").text("There was an issue with your username or password").show();
+                $("#li_error").text("There was an issue with signup").show();
                });
        },
  

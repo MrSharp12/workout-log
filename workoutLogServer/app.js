@@ -3,7 +3,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let sequelize = require('./db');
 
-var User = sequelize.import('./models/user.js');
+let User = sequelize.import('./models/user.js');
 
 //creates a table in postgres, matches the defined model
 //doesn't drop db
