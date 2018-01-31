@@ -1,5 +1,5 @@
-let Sequelize = require('sequelize');
-let sequelize = new Sequelize('workoutlog', 'postgres', 'Rorylovespygar1', {
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('workoutlog', 'postgres', 'Rorylovespygar1', {
 	host: 'localhost',
 	dialect: 'postgres'
 });
@@ -15,7 +15,8 @@ sequelize.authenticate().then(
 );
 
 //imports user 'Object factory' into db
-// let User = sequelize.import('./models/user');
-// let Definition = sequelize.import('./models/definition');
+var User = sequelize.import('./models/user');
+var Log = sequelize.import('./models/log');
+var Definition = sequelize.import('./models/definition');
 
 module.exports = sequelize;

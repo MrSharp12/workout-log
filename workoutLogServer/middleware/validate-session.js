@@ -2,12 +2,12 @@
 //process.env.JWT_SECRET is used to encode/ecode a user
 //and create a validated session
 
-let jwt = require('jsonwebtoken');
-let sequelize = require('../db');
-let User = sequelize.import('../models/user');
+var jwt = require('jsonwebtoken');
+var sequelize = require('../db');
+var User = sequelize.import('../models/user');
 
 module.exports = function(req, res, next) {
-	let sessionToken = req.headers.authorization;
+	var sessionToken = req.headers.authorization;
 	
 if(!req.body.user && sessionToken){
 		jwt.verify(sessionToken, process.env.JWT_SECRET, function(err, decoded) {
