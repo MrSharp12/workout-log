@@ -5,13 +5,13 @@ let app = express();
 let bodyParser = require('body-parser');
 let sequelize = require('./db');
 
-let User = sequelize.import('./models/user.js');
-let Definition = sequelize.import('./models/definition');
-let Log = sequelize.import('./models/log');
+// let User = sequelize.import('./models/user.js');
+// let Definition = sequelize.import('./models/definition');
+// let Log = sequelize.import('./models/log');
 
 //creates a table in postgres, matches the defined model
 //doesn't drop db
-// sequelize.sync();
+sequelize.sync();
 // Definition.sync();
 
 //DANGER: DROPS THE TABLE
