@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config(); this is for deployment
 
 var express = require('express');
 var app = express();
