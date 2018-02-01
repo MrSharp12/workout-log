@@ -56,7 +56,7 @@ $(function() {
 
 			getWorkout: function() {
 				var thisLog = {id: $(this).attr("id")};
-				console.log(thisLog);
+				// console.log(thisLog);
 				logID = thisLog.id;
 				var updateData = { log: thisLog };
 				var getLog = $.ajax({
@@ -98,7 +98,7 @@ $(function() {
 				});
 
 				updater.done(function(data) {
-					console.log(data);
+					// console.log(data);
 					$("#update-description").val("");
 					$("#update-result").val("");
 					$('a[href="#history"]').tab("show");
