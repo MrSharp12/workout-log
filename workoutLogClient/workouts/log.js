@@ -12,6 +12,8 @@ $(function() {
 				}
 				$("#log-definition").children().remove();
 				$("#log-definition").append(opts);
+				$("#update-defintion").children().remove();
+				$("#update-definition").append(opts);
 			},
 
 			setHistory: function() {

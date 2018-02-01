@@ -48,7 +48,6 @@ router.get('/', function(req, res) {
 });
 
 //This will retrieve one workout specified by the log id
-//This will retrieve one workout specified by the log id
 router.get('/:id', function(req, res) {
 	var data = req.params.id;
 	//console.log(data); here for testing purposes
