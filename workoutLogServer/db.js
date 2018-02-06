@@ -1,3 +1,4 @@
+//our database connection
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('workoutlog', 'postgres', 'Rorylovespygar1', {
 	host: 'localhost',

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap -->
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="./openCSS.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+<header id="landingHeader">
+    <h1 class="text-center" id="landingTitle">Ripped Up</h1>
+
+    <div id="forLogin" class="text-center">
+        <button data-toggle="modal" data-target="#login-modal" class="btn" id="loginButton">Login</button>
+        <button data-toggle="modal" data-target="#signup-modal" class="btn" id="signUpButton">Sign Up</button>
+    </div>
+    <div id="forLogout" style="display:none;">
+        <button class="btn btn-primary">Logout</button>
+    </div>
+    </div>
+</header>    
+
+    <div class="modal fade" id="login-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-center" id="loginHeader">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" style="display: none;" role="alert" id="li_error"></div>
+                    <div class="form-group">
+                        <label for="li_username">Username:</label>
+                        <input id="li_username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="li_password">Password:</label>
+                        <input type="password" id="li_password" />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="loginCancel">Cancel</button>
+                    <button id="login" type="button" class="btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signup-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-center" id="signInHeader">Sign Up</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" style="display:none;" id="su_error"></div>
+                    <div class="form-group">
+                        <label for="su_username">Username:</label>
+                        <input id="su_username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="su_password">Password:</label>
+                        <input type="password" id="su_password" />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="signup" type="button" class="btn">Signup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $('#login-modal').on('show.bs.modal', function (e) {
+            $('body').addClass('test');
+        });
+    </script>
+</body>
+
+</html>

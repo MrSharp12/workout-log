@@ -6,10 +6,11 @@ var Definition = sequelize.import('../models/definition');
 
 router.post('/', function(req, res) {
     // req has some body properties that have a username and pwd
-    var description = req.body.log.description; 
+    var description = req.body.log.desc; 
     var result = req.body.log.result; 
     var user = req.user;
-    var definition = req.body.log.def;
+	var definition = req.body.log.def;
+	var date = req.body.log.date;//added
    
 
     // Use our sequelize model to create log
@@ -18,7 +19,8 @@ router.post('/', function(req, res) {
 	    	description: description,
 	    	result: result,
 	    	owner: user.id,
-	    	def: definition
+			def: definition,
+			date: date //added
 	    })
 	    .then(
 	    	function createSuccess(log) {
@@ -70,14 +72,16 @@ router.put('/', function(req, res) {
     var description = req.body.log.desc;
     var result = req.body.log.result; 
     var data = req.body.log.id;
-    var definition = req.body.log.def;
+	var definition = req.body.log.def;
+	var date = req.body.log.date;
     console.log(req);
     Log
     	.update(
     	{
     		description: description,
 	    	result: result,
-	    	def: definition
+			def: definition,
+			date: date
     	},
 
     	{where: {id: data}}

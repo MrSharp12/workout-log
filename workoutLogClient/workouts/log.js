@@ -1,63 +1,70 @@
-$(function() {
+$(function () {
 	$.extend(WorkoutLog, {
 		log: {
 			workouts: [],
 
-			setDefinitions: function() {
+			correctedDateView: function (date) {
+				return moment(date).format('MM-DD-YYYY');
+			},
+
+			setDefinitions: function () {
 				var defs = WorkoutLog.definition.userDefinitions;
 				var len = defs.length;
 				var opts;
 				for (var i = 0; i < len; i++) {
-					opts += "<option value='" + defs[i].id +"'>" + defs[i].description + "</option>";
+					opts += "<option value='" + defs[i].id + "'>" + defs[i].description + "</option>";
 				}
 				$("#log-definition").children().remove();
 				$("#log-definition").append(opts);
-				$("#update-defintion").children().remove();
+				$("#update-definition").children().remove();
 				$("#update-definition").append(opts);
 			},
 
-			setHistory: function() {
+			setHistory: function () {
 				var history = WorkoutLog.log.workouts;
 				var len = history.length;
 				var lis = "";
-					for (var i = 0; i < len; i++) {
-					lis += "<li class='list-group-item'>" + 
-					// history[i].id + " - " + 
-					history[i].def + " - " + 
-					history[i].result + " " +
-					// pass the log.id into the button's id attribute // watch your quotes!
-					"<div class='pull-right'>" +
+				for (var i = 0; i < len; i++) {
+					lis += "<li class='list-group-item'>" +
+						// history[i].id + " - " + 
+						history[i].def + " - " +
+						history[i].result + " - " +
+						history[i].date +
+						// pass the log.id into the button's id attribute // watch your quotes!
+						"<div class='pull-right'>" +
 						"<button id='" + history[i].id + "' class='update'><strong>U</strong></button>" +
 						"<button id='" + history[i].id + "' class='remove'><strong>X</strong></button>" +
-					"</div></li>";
+						"</div></li>";
 				}
 				$("#history-list").children().remove();
 				$("#history-list").append(lis);
 			},
-			create: function() {
-				var itsLog = { 
-		        	desc: $("#log-description").val(),
-		         	result: $("#log-result").val(),
-		         	def: $("#log-definition option:selected").text()
-		      	};
-		      	var postData = { log: itsLog };
-		      	var logger = $.ajax({
-		         	type: "POST",
-		         	url: WorkoutLog.API_BASE + "log",
-		         	data: JSON.stringify(postData),
-		         	contentType: "application/json"
-		      	});
+			create: function () {
+				var itsLog = {
+					desc: $("#log-description").val(),
+					result: $("#log-result").val(),
+					def: $("#log-definition option:selected").text(),
+					date: $("#log-date").val()
+				};
+				var postData = { log: itsLog };
+				var logger = $.ajax({
+					type: "POST",
+					url: WorkoutLog.API_BASE + "log",
+					data: JSON.stringify(postData),
+					contentType: "application/json"
+				});
 
-		      	logger.done(function(data) {
-	      			WorkoutLog.log.workouts.push(data);
-	      			$("#log-description").val("");
+				logger.done(function (data) {
+					WorkoutLog.log.workouts.push(data);
+					$("#log-description").val("");
 					$("#log-result").val("");
+					$("#log-date").val();
 					$('a[href="#history"]').tab("show");
-		      	});
+				});
 			},
 
-			getWorkout: function() {
-				var thisLog = {id: $(this).attr("id")};
+			getWorkout: function () {
+				var thisLog = { id: $(this).attr("id") };
 				// console.log(thisLog);
 				logID = thisLog.id;
 				var updateData = { log: thisLog };
@@ -67,52 +74,55 @@ $(function() {
 					data: JSON.stringify(updateData),
 					contentType: "application/json"
 				});
-				getLog.done(function(data){
-					
-				    $('a[href="#update-log"]').tab("show");
+				getLog.done(function (data) {
+
+					$('a[href="#update-log"]').tab("show");
 					$('#update-result').val(data.result);
 					$('#update-description').val(data.description);
 					$('#update-id').val(data.id);
+					$('#update-date').val(WorkoutLog.log.correctedDateView(data.date))
 				});
 
 			},
 
-			updateWorkout: function() {
+			updateWorkout: function () {
 				$("#update").text("Update");
-				var updateLog = { 
+				var updateLog = {
 					id: $('#update-id').val(),
 					desc: $("#update-description").val(),
-						result: $("#update-result").val(),
-						def: $("#update-definition option:selected").text()
+					result: $("#update-result").val(),
+					def: $("#update-definition option:selected").text(),
+					date: $("#update-date").val()
 				};
-				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
-					if(WorkoutLog.log.workouts[i].id == updateLog.id){
+				for (var i = 0; i < WorkoutLog.log.workouts.length; i++) {
+					if (WorkoutLog.log.workouts[i].id == updateLog.id) {
 						WorkoutLog.log.workouts.splice(i, 1);
 					}
 				}
 				WorkoutLog.log.workouts.push(updateLog);
 				var updateLogData = { log: updateLog };
 				var updater = $.ajax({
-						type: "PUT",
-						url: WorkoutLog.API_BASE + "log",
-						data: JSON.stringify(updateLogData),
-						contentType: "application/json"
+					type: "PUT",
+					url: WorkoutLog.API_BASE + "log",
+					data: JSON.stringify(updateLogData),
+					contentType: "application/json"
 				});
 
-				updater.done(function(data) {
+				updater.done(function (data) {
 					// console.log(data);
 					$("#update-description").val("");
 					$("#update-result").val("");
+					$('#update-date').val("");
 					$('a[href="#history"]').tab("show");
 				});
 
 			},
 
 
-			delete: function(){
+			delete: function () {
 				var thisLog = {
 					// "this" is the button on the li
-			//.attr("id") targets the value of the id attribute of button
+					//.attr("id") targets the value of the id attribute of button
 					id: $(this).attr("id")
 				};
 				var deleteData = { log: thisLog };
@@ -128,43 +138,54 @@ $(function() {
 				$(this).closest("li").remove();
 
 				// deletes item out of workouts array
-				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
-					if(WorkoutLog.log.workouts[i].id == thisLog.id){
+				for (var i = 0; i < WorkoutLog.log.workouts.length; i++) {
+					if (WorkoutLog.log.workouts[i].id == thisLog.id) {
 						WorkoutLog.log.workouts.splice(i, 1);
 					}
 				}
-				deleteLog.fail(function(){
+				deleteLog.fail(function () {
 					console.log("nope. you didn't delete it.");
 				});
 			},
 
 			// history
-			fetchAll: function() {
+			fetchAll: function () {
 				var fetchDefs = $.ajax({
-			         type: "GET",
-			         url: WorkoutLog.API_BASE + "log",
-			         headers: {
-			         	"authorization": window.localStorage.getItem("sessionToken")
-			         }
-			      })
-			      .done(function(data) {
-			         WorkoutLog.log.workouts = data;
-			      })
-			      .fail(function(err) {
-			         console.log(err);
-			      });
+					type: "GET",
+					url: WorkoutLog.API_BASE + "log",
+					headers: {
+						"authorization": window.localStorage.getItem("sessionToken")
+					}
+				})
+					.done(function (data) {
+						var oldDates = data.map(workout => workout.date);
+						console.log(oldDates);
+
+						for (var i = 0; i < oldDates.length; i++) {
+							data[i].date = (WorkoutLog.log.correctedDateView(oldDates[i]));
+						}
+						// console.log(data);
+						WorkoutLog.log.workouts = data;
+					})
+					.fail(function (err) {
+						console.log(err);
+					});
 			}
 		}
 	});
 
+	// $("#log-save").on("click", function() {
+	// 	console.log($("#date").val());
+	// })
 	$("#log-save").on("click", WorkoutLog.log.create);
 	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.delete);
 	$("#log-update").on("click", WorkoutLog.log.updateWorkout);
 	$("#history-list").delegate('.update', 'click', WorkoutLog.log.getWorkout);
 
 
-	   // fetch history if we already are authenticated and refreshed
-   if (window.localStorage.getItem("sessionToken")) {
-      WorkoutLog.log.fetchAll();
-   }
+
+	// fetch history if we already are authenticated and refreshed
+	if (window.localStorage.getItem("sessionToken")) {
+		WorkoutLog.log.fetchAll();
+	}
 });

@@ -5,7 +5,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var sequelize = require('./db');
 
-sequelize.sync(); // tip: {force: true} for resetting tables
+sequelize.sync(); 
+// tip: {force: true} for resetting tables
 
 app.use(bodyParser.json());
 

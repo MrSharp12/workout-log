@@ -1,0 +1,55 @@
+/* -- BASIC SETUP --*/
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(120, 180, 148);
+}
+
+/*-- RESUABLE ITEMS --*/
+.btn { 
+    border-radius: 0; 
+    overflow: hidden;
+}
+
+.btn:hover { background-color: rgb(108, 154, 51); }
+
+/*-- HEADER --*/
+#landingHeader {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url('./images/element5-digital-499976.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+#loginButton,
+#signUpButton { width: 9%;}
+
+/*-- MODALS --*/
+.modal-content {
+   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url('./images/martin-barak-353522.jpg');
+   background-size: cover;
+   padding-top: 5px;
+}
+
+.modal-dialog,
+.modal-content { height: 70%; }
+
+#landingTitle { 
+    font-size: 250px;
+    padding-top: 100px;
+}
+
+#loginHeader, #signInHeader { font-size: 50px; }
+
+#li_username,
+#li_password,
+#su_username,
+#su_password { width: 80%; }
+
+
+/*-- CAROUSEL --*/
+    
+.logImg {
+    width: 100%;
+    height: auto;
+}
+
