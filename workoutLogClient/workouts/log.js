@@ -19,17 +19,22 @@ $(function () {
 				$("#update-definition").children().remove();
 				$("#update-definition").append(opts);
 			},
-
+			// var oldDates = data.map(workout => workout.date);
+			// for (var i = 0; i < oldDates.length; i++) {
+			// 	data[i].date = (WorkoutLog.log.correctedDateView(oldDates[i]));
+			// }
 			setHistory: function () {
 				var history = WorkoutLog.log.workouts;
+				var correctedHistoryDates = history.map(workout => workout.date);
 				var len = history.length;
 				var lis = "";
 				for (var i = 0; i < len; i++) {
+					history[i].date = (WorkoutLog.log.correctedDateView(correctedHistoryDates[i]));
 					lis += "<li class='list-group-item'>" +
 						// history[i].id + " - " + 
 						history[i].def + " - " +
 						history[i].result + " - " +
-						history[i].date +
+						history[i].date	+
 						// pass the log.id into the button's id attribute // watch your quotes!
 						"<div class='pull-right'>" +
 						"<button id='" + history[i].id + "' class='update'><strong>U</strong></button>" +
@@ -58,7 +63,7 @@ $(function () {
 					WorkoutLog.log.workouts.push(data);
 					$("#log-description").val("");
 					$("#log-result").val("");
-					$("#log-date").val();
+					$("#log-date").val(WorkoutLog.log.correctedDateView(data.date));
 					$('a[href="#history"]').tab("show");
 				});
 			},
@@ -159,7 +164,6 @@ $(function () {
 				})
 					.done(function (data) {
 						var oldDates = data.map(workout => workout.date);
-						console.log(oldDates);
 
 						for (var i = 0; i < oldDates.length; i++) {
 							data[i].date = (WorkoutLog.log.correctedDateView(oldDates[i]));
